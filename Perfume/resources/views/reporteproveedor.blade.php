@@ -15,7 +15,7 @@
                 <option  value="0"->Bordas</option>
                 <option  value="0"->Fraccaroli Brasil</option>
             </select>
-            <button type="submit"> Seleccionar</button>
+            <a href="{{ url('/reporte') }}">Reporte</a>
           <div>
         </div>
 @endsection
