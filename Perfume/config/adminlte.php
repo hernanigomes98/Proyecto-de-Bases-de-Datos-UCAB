@@ -241,10 +241,16 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        ['header' => 'Opciones de evaluacion'],
+        ['header' => 'OPCIONES DE EVALUACION'],
         [
             'text' => 'Evaluacion inicial',
             'url'  => '/prueba',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        ['header' => 'REPORTES'],
+        [
+            'text' => 'Reporte proveedor',
+            'url'  => 'reporteproveedor',
             'icon' => 'fas fa-fw fa-user',
         ],
     ],
