@@ -139,12 +139,7 @@ class prueba extends Controller
      */
     public function update(Request $request, $idproveedor)
     {
-        $data=productor::all();
-        $data2=proveedor::all();
-        $data5=Db::table('proveedor')->where('nombre', '=', $request->get('proveedor'))->paginate();
-        $data3=DB::table('metodo_envio')->join('pais','metodo_envio.fkpais','=','pais.idpais')->where('fk_proveedor', '=', $data5->idproveedor)->paginate();
-        //return view('evaluacioninicial', ["data" => $data, "data2" => $data2, "data3" => $data3]);
-        return redirect('prueba')->with($data, $data2, $data3);
+
     }
 
     /**
