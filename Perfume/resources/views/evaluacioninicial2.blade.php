@@ -18,11 +18,13 @@
             </div>
           </div>
           <br>
+          <form action="{{url ('crearcontrato/'.$productor->idproductor.'/'.$proveedor->idproveedor.'')}}" method="POST">
+            @csrf
           <h5 class="h3 mb-4 text-gray-800">Metodos de envio ofrecidos por el proveedor:</h5>
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" name="metodos_envio" id="metodos_envio" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tipo de envio</th>
@@ -44,7 +46,7 @@
                         @endif
                         <td>{{$d3->nombrepais}}</td>
                         <td>{{$d3->costoadicional}}</td>
-                        <td><input type="checkbox" id="envio" name="gender" value="other"></td>
+                        <td><input type="checkbox" id="envio" name="envio[]" value="{{$d3->idmetenvio}}"></td>
                     </tr>
                     @endforeach
 
@@ -57,7 +59,7 @@
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" name="metodos_pago" id="metodos_pago" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>Tipo de pago</th>
@@ -81,14 +83,17 @@
                         @endif
                         <td>{{$d4->porcentajecuota}} %</td>
                         <td>{{$d4->tiempocuota}} meses</td>
-                        <td><input type="radio" id="envio" name="gender" value="other"></td>
+                      <td><input type="checkbox" id="envio" name="pago[]" value="{{$d4->idmetpago}}"></td>
                       </tr>
                     @endforeach
                   </tbody>
                 </table>
+                <br>
+                <button type="submit" onClick="alert('Se ha registrado el contrato exitosamente')"> Generar Contrato</button>
               </div>
             </div>
           </div>
+          </form>
         </div>
 
         </div>
