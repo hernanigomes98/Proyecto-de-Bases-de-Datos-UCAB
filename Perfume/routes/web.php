@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('prueba', 'prueba');
+
+Route::post('/guardar', 'prueba@store');
+
+Route::get('evaluacioninicial2/{idproductor}/{idproveedor}','prueba@redireccionar');
