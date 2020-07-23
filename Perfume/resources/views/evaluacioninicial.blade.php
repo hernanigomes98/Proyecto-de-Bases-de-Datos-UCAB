@@ -16,7 +16,7 @@
                       <select name="productor" class="select-css">
                           <option selected="selected" value="0"->Ninguno</option>
                           @foreach ($data as $d)
-                              <option value="{{$d->idproductor}}">{{$d->nombre}}</option>
+                      <option value="{{$d->idproductor}}">{{$d->nombre}} {{$d->idproductor}}</option>
                           @endforeach
                       </select>
                     </div>
@@ -25,7 +25,7 @@
                       <select id="proveedor" name="proveedor" class="select-css">
                           <option selected="selected" value="0"->Ninguno</option>
                           @foreach ($data2 as $d2)
-                              <option value="{{$d2->idproveedor}}">{{$d2->nombre}}</option>
+                              <option value="{{$d2->idproveedor}}">{{$d2->nombre}} {{$d2->idproveedor}}</option>
                           @endforeach
                       </select>
                       <button type="submit"></button>

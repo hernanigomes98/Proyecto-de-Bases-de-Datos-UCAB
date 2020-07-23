@@ -19,7 +19,7 @@ class prueba extends Controller
     public function index()
     {
         //$data4=Db::table('proveedor')->where('nombre', '=', $request->get('proveedor'))->paginate();
-        $data=productor::all();
+        $data=db::table('productor')->paginate();
         $data2=proveedor::all();
         $data3=Db::table('metodo_envio')->join('pais','metodo_envio.fkpais','=','pais.idpais')->where('fk_proveedor', '=', 2)->paginate();
         $data4=Db::table('metodo_pago')->where('fk_proveedor','=',2)->paginate();
@@ -48,7 +48,7 @@ class prueba extends Controller
         $data=$request->get('proveedor');
         $data2=$request->get('productor');
         //return view('evaluacioninicial', ["data" => $data, "data2" => $data2]);
-        return redirect('evaluacioninicial2/'.$data.'/'.$data2.'');
+        return redirect('evaluacioninicial2/'.$data2.'/'.$data.'');
     }
 
     public function redireccionar($idproductor,$idproveedor){

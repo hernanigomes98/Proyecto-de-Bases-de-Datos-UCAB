@@ -44,7 +44,7 @@
                         @endif
                         <td>{{$d3->nombrepais}}</td>
                         <td>{{$d3->costoadicional}}</td>
-                        <td><input type="radio" id="envio" name="gender" value="other"></td>
+                        <td><input type="checkbox" id="envio" name="gender" value="other"></td>
                     </tr>
                     @endforeach
 

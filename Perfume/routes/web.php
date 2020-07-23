@@ -18,3 +18,7 @@ Route::get('/', function () {
 });
 
 Route::resource('prueba', 'prueba');
+
+Route::post('/guardar', 'prueba@store');
+
+Route::get('evaluacioninicial2/{idproductor}/{idproveedor}','prueba@redireccionar');
