@@ -25,6 +25,7 @@ class prueba extends Controller
         $data2=proveedor::all();
         $data3=Db::table('metodo_envio')->join('pais','metodo_envio.fkpais','=','pais.idpais')->where('fk_proveedor', '=', 2)->paginate();
         $data4=Db::table('metodo_pago')->where('fk_proveedor','=',2)->paginate();
+
         return view('evaluacioninicial', ["data" => $data, "data2" => $data2, "data3" => $data3, "data4"=>$data4]);
     }
 

@@ -245,13 +245,28 @@ return [
         [
             'text' => 'Evaluacion inicial',
             'url'  => '/prueba',
-            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Renovacion Contrato',
+            'url'  => '',
+        ],
+        [
+            'text' => 'Cancelar Contrato',
+            'url'  => '/cancelarContratoController',
+        ],
+
+        ['header' => 'OPCIONES DE COMPRA'],
+        [
+            'text' => 'Realizar pedido',
+            'url'  => '',
+        ],
+        ['header' => 'RECOMENDADOR',
+         'url'  => '',
         ],
         ['header' => 'REPORTES'],
         [
             'text' => 'Reporte proveedor',
             'url'  => 'reporteproveedor',
-            'icon' => 'fas fa-fw fa-user',
         ],
     ],
 
