@@ -15,40 +15,40 @@ use Illuminate\Support\Facades\Route;
 // use PHPJasper\PHPJasper;
 
 // Route::get('/compilarReporte', function () {
-//     $input = base_path() .
+//    $input = base_path() .
 //     '/vendor/geekcom/phpjasper/examples/hello_world.jrxml';
 
-//     $jasper = new PHPJasper;
-//     $jasper->compile($input)->execute();
+//      $jasper = new PHPJasper;
+//      $jasper->compile($input)->execute();
 
-//     return response()->json([
-//         'status' => 'ok',
-//         'msj' => '¡Reporte compilado!'
-//     ]);
-// });
+//      return response()->json([
+//          'status' => 'ok',
+//          'msj' => '¡Reporte compilado!'
+//      ]);
+//  });
 
-// Route::get('/reporte', function () {
-//     $input = base_path() .
-//     '/vendor/geekcom/phpjasper/examples/hello_world.jasper';
-//     $output = base_path() .
-//     '/vendor/geekcom/phpjasper/examples';
-//     $options = [
-//         'format' => ['pdf']
+//  Route::get('/reporte', function () {
+//      $input = base_path() .
+//      '/vendor/geekcom/phpjasper/examples/hello_world.jasper';
+//      $output = base_path() .
+//      '/vendor/geekcom/phpjasper/examples';
+//      $options = [
+//          'format' => ['pdf']
 
-//     ];
+//      ];
 
-//     $jasper = new PHPJasper;
+//      $jasper = new PHPJasper;
 
-//     $jasper->process(
-//         $input,
-//         $output,
-//         $options
-//     )->execute();
+//      $jasper->process(
+//          $input,
+//          $output,
+//          $options
+//      )->execute();
 
-//     $pathToFile = base_path() .
-//     '/vendor/geekcom/phpjasper/examples/hello_world.pdf';
+//      $pathToFile = base_path() .
+//      '/vendor/geekcom/phpjasper/examples/merged.pdf';
 //     return response()->file($pathToFile);
-// });
+//  });
 
 // Route::get('/listarParametrosReporte', function () {
 //     $input = base_path() .
