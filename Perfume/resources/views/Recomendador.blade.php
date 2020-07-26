@@ -31,16 +31,12 @@
                         <div class="col-xs-8">
                             <h2><a href="#">{{$d->nombre}}</a></h2>
                         </div>
-                        <div class="col-xs-4"><a class="small-text" href="#">compare </a></div>
                     </div>
                     <div class="product-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i><a class="small-text" href="#">82 reviews</a></div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ornare sem sed nisl dignissim, facilisis dapibus lacus vulputate. Sed lacinia lacinia magna. </p>
                             <div class="row">
-                                <div class="col-xs-6"><button class="btn btn-default" type="button">Buy Now!</button></div>
                                 <div class="col-xs-6">
-                                    <p class="product-price">$599.00 </p>
                                 </div>
                             </div>
                         </div>

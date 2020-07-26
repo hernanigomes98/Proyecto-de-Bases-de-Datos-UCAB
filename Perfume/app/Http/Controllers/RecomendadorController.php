@@ -21,10 +21,9 @@ class RecomendadorController extends Controller
     public function index()
     {
         $data=db::table('productor')->paginate();
-        $data2=proveedor::all();
         $data3=familia_olfativa::all();
         $data4=perfume::all();
-        return view('FiltroRecomendador', ["data" => $data, "data2" => $data2, "data3" => $data3, "data4" => $data4]);
+        return view('FiltroRecomendador', ["data" => $data, "data3" => $data3, "data4" => $data4]);
 
     }
 
