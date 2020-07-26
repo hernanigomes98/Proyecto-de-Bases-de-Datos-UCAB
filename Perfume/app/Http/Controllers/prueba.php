@@ -25,8 +25,8 @@ class prueba extends Controller
         $data2=proveedor::all();
         $data3=Db::table('metodo_envio')->join('pais','metodo_envio.fkpais','=','pais.idpais')->where('fk_proveedor', '=', 2)->paginate();
         $data4=Db::table('metodo_pago')->where('fk_proveedor','=',2)->paginate();
-
-        return view('evaluacioninicial', ["data" => $data, "data2" => $data2, "data3" => $data3, "data4"=>$data4]);
+        $data5=Db::table('historico_membresia')->paginate();
+        return view('evaluacioninicial', ["data" => $data, "data2" => $data2, "data3" => $data3, "data4"=>$data4, 'data5'=>$data5]);
     }
 
     /**
@@ -59,7 +59,8 @@ class prueba extends Controller
         $data2=DB::table('proveedor')->where('idproveedor','=',$idproveedor)->first();
         $data3=Db::table('metodo_envio')->join('pais','metodo_envio.fkpais','=','pais.idpais')->where('fk_proveedor', '=', $idproveedor)->paginate();
         $data4=Db::table('metodo_pago')->where('fk_proveedor','=',$idproveedor)->paginate();
-        return view('evaluacioninicial2',["productor"=>$data,"proveedor"=>$data2,"metodo_envio"=>$data3,"metodo_pago"=>$data4]);
+        $data5=Db::table('historico_membresia')->where('fechafin','=',null)->paginate();
+        return view('evaluacioninicial2',["productor"=>$data,"proveedor"=>$data2,"metodo_envio"=>$data3,"metodo_pago"=>$data4, "membresia"=>$data5]);
     }
 
     public function storeMetodos(Request $request,$idproductor,$idproveedor){
