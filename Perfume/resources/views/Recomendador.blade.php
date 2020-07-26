@@ -18,8 +18,16 @@
     <div class="container">
         <div class="row product-list dev">
 
-            @foreach ($perfume as $d)
 
+
+            @if($perfume == null)
+
+           <h1>no no hay filtro seleccionado</h1>
+
+         @else
+
+
+            @foreach ($perfume as $d)
 
 
             <div class="col-md-4 col-sm-6 product-item animation-element slide-top-left">
@@ -46,6 +54,8 @@
 
             @endforeach
 
+
+        @endif
 
         </div>
     </div>

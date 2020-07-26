@@ -13,7 +13,7 @@
 
                     <div class="col-sm">
                       <a>Productor: </a>
-                      <select name="productor" class="select-css">
+                      <select id="productor" name="productor" class="select-css">
                           <option selected="selected" value="0"->Ninguno</option>
                           @foreach ($data as $d)
                       <option value="{{$d->idproductor}}">{{$d->nombre}}</option>
@@ -41,7 +41,7 @@
                         </select>
                     </div>
                     <div class="col-sm">
-                        <button type="submit"> Seleccionar</button>
+                        <button type="submit">Filtrar</button>
                     </div>
                   </div>
 

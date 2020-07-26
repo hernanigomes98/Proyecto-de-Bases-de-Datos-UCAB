@@ -54,11 +54,42 @@ class RecomendadorController extends Controller
     }
 
     public function redireccionar($idproductor,$idfamiliaolfativa,$edad){
-        $data=DB::table('productor')->where('idproductor','=',$idproductor)->first();
-        $data3=DB::table('familia_olfativa')->where('idfamiliaolfativa','=',$idfamiliaolfativa)->paginate();
+
         $data4=DB::table('pe_fa')->where('idfamiliaolfativa','=',$idfamiliaolfativa)->first();
+
+     if (($idproductor != 0) && ($idfamiliaolfativa != 0) && ($edad)) {
         $data5=DB::table('perfume')->where('edad','=',$edad)->where('fk_productor','=',$idproductor)->where('idperfume','=',$data4->idperfume)->paginate();
-        return view('Recomendador',["productor"=>$data,"familia_olfativa"=>$data3,"perfume"=>$data5]);
+    }
+
+     elseif (($idproductor != 0) && ($idfamiliaolfativa != 0) && ($edad == 0)) {
+        $data5=DB::table('perfume')->where('fk_productor','=',$idproductor)->where('idperfume','=',$data4->idperfume)->paginate();
+    }
+
+     elseif (($idproductor != 0) && ($idfamiliaolfativa == 0) && ($edad) ) {
+        $data5=DB::table('perfume')->where('edad','=',$edad)->where('fk_productor','=',$idproductor)->paginate();
+    }
+
+     elseif (($idproductor == 0) && ($idfamiliaolfativa != 0) && ($edad)) {
+        $data5=DB::table('perfume')->where('edad','=',$edad)->where('idperfume','=',$data4->idperfume)->paginate();
+    }
+
+     elseif (($idproductor != 0) && ($idfamiliaolfativa == 0) && ($edad == 0))  {
+        $data5=DB::table('perfume')->where('fk_productor','=',$idproductor)->paginate();
+    }
+
+     elseif (($idproductor == 0) && ($idfamiliaolfativa != 0) && ($edad == 0)) {
+        $data5=DB::table('perfume')->where('idperfume','=',$data4->idperfume)->paginate();
+    }
+
+     elseif (($idproductor == 0) && ($idfamiliaolfativa == 0) && ($edad)) {
+        $data5=DB::table('perfume')->where('edad','=',$edad)->paginate();
+    }
+
+    elseif (($idproductor == 0) && ($idfamiliaolfativa == 0) && ($edad == 0)) {
+        $data5=null;
+    }
+
+        return view('Recomendador',["perfume"=>$data5]);
     }
 
     /**
