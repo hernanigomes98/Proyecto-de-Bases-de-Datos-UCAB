@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\productor;
 use App\proveedor;
-use App\metodo_envio;
-use App\pais;
-use App\cond_part;
+use App\familia_olfativa;
+use App\perfume;
+use App\pe_fa;
 use App\contrato;
 use Illuminate\Support\Facades\DB;
 
-class cancelarContratoController extends Controller
+class RecomendadorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +20,12 @@ class cancelarContratoController extends Controller
      */
     public function index()
     {
-        //
         $data=db::table('productor')->paginate();
-        return view('cancelarcontrato', ["data" => $data]);
+        $data2=proveedor::all();
+        $data3=familia_olfativa::all();
+        $data4=perfume::all();
+        return view('FiltroRecomendador', ["data" => $data, "data2" => $data2, "data3" => $data3, "data4" => $data4]);
+
     }
 
     /**
@@ -43,26 +46,22 @@ class cancelarContratoController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $data=$request->get('productor');
-        return redirect('cancelarcontrato2/'.$data.'/');
+        //$data=$request->get('proveedor');
+        $data2=$request->get('productor');
+        $data3=$request->get('familiaolfativa');
+        $data4=$request->get('EdadPerfume');
+        //return view('evaluacioninicial', ["data" => $data, "data2" => $data2]);
+        return redirect('Recomendador/'.$data2.'/'.$data3.'/'.$data4.'');
     }
 
-    public function redireccionar($idproductor){
+    public function redireccionar($idproductor,$idfamiliaolfativa,$edad){
         $data=DB::table('productor')->where('idproductor','=',$idproductor)->first();
-        $data2=Db::table('contrato')->join('proveedor','contrato.fk_proveedor','=','proveedor.idproveedor')->where('fk_productor', '=', $idproductor)->where('fechacancelacion','=',null)->paginate();
-        return view('cancelarcontrato2',["productor"=>$data,"contrato"=>$data2]);
+        $data3=DB::table('familia_olfativa')->where('idfamiliaolfativa','=',$idfamiliaolfativa)->paginate();
+        $data4=DB::table('pe_fa')->where('idfamiliaolfativa','=',$idfamiliaolfativa)->first();
+        $data5=DB::table('perfume')->where('edad','=',$edad)->where('fk_productor','=',$idproductor)->where('idperfume','=',$data4->idperfume)->paginate();
+        return view('Recomendador',["productor"=>$data,"familia_olfativa"=>$data3,"perfume"=>$data5]);
     }
 
-    public function storeContrato(Request $request){
-        $contrato=$request->get('contratoe');
-        $motivo=$request->get('motivo');
-        $cancelar=contrato::findOrFail($contrato);
-        $cancelar->fechacancelacion=date('Y-m-d', strtotime('now'));
-        $cancelar->motivocancelacion=$motivo;
-        $cancelar->update();
-        return redirect('/');
-    }
     /**
      * Display the specified resource.
      *

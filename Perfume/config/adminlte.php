@@ -260,8 +260,10 @@ return [
             'text' => 'Realizar pedido',
             'url'  => '',
         ],
-        ['header' => 'RECOMENDADOR',
-         'url'  => '',
+        ['header' => 'RECOMENDADOR'],
+        [
+        'text' => 'Recomendador',
+         'url'  => '/RecomendadorController',
         ],
         ['header' => 'REPORTES'],
         [
