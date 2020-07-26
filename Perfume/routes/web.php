@@ -117,8 +117,11 @@ Route::resource('cancelarContratoController', 'cancelarContratoController');
 Route::resource('pedidoController', 'pedidoController');
 
 /////////////////////////////////////////////////////////////////////////////////////////
+Route::resource('RecomendadorController', 'RecomendadorController');
 
 Route::post('/guardar', 'prueba@store');
+
+Route::post('/guardarR', 'RecomendadorController@store');
 
 Route::post('/guardarproductor','cancelarContratoController@store');
 
@@ -129,6 +132,8 @@ Route::post('/guardarempresaspedido/{idproductor}/','pedidoController@storeempre
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('evaluacioninicial2/{idproductor}/{idproveedor}','prueba@redireccionar');
+
+Route::get('Recomendador/{idproductor}/{idfamiliaolfativa}/{idperfume}','RecomendadorController@redireccionar');
 
 Route::get('cancelarcontrato2/{idproductor}/','cancelarContratoController@redireccionar');
 
@@ -150,4 +155,12 @@ Route::get('reporteproveedor', function(){
 
 Route::get('cancelarcontrato', function(){
     return view('cancelarcontrato');
+});
+
+Route::get('FiltroRecomendador',function(){
+    return view('FiltroRecomendador');
+});
+
+Route::get('Recomendador', function(){
+    return view('Recomendador');
 });

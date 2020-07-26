@@ -262,8 +262,8 @@ return [
         ],
         ['header' => 'RECOMENDADOR'],
         [
-            'text' => 'Recomendador',
-            'url'  => '',
+        'text' => 'Recomendador',
+         'url'  => '/RecomendadorController',
         ],
         ['header' => 'REPORTES'],
         [
