@@ -50,7 +50,7 @@ class cancelarContratoController extends Controller
 
     public function redireccionar($idproductor){
         $data=DB::table('productor')->where('idproductor','=',$idproductor)->first();
-        $data2=Db::table('contrato')->join('proveedor','contrato.fk_proveedor','=','proveedor.idproveedor')->where('fk_productor', '=', $idproductor)->where('fechacancelacion','!=',null)->paginate();
+        $data2=Db::table('contrato')->join('proveedor','contrato.fk_proveedor','=','proveedor.idproveedor')->where('fk_productor', '=', $idproductor)->where('fechacancelacion','=',null)->paginate();
         return view('cancelarcontrato2',["productor"=>$data,"contrato"=>$data2]);
     }
 

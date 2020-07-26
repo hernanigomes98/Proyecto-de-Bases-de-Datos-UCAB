@@ -106,9 +106,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -117,17 +114,35 @@ Route::resource('prueba', 'prueba');
 
 Route::resource('cancelarContratoController', 'cancelarContratoController');
 
+Route::resource('pedidoController', 'pedidoController');
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
 Route::post('/guardar', 'prueba@store');
 
 Route::post('/guardarproductor','cancelarContratoController@store');
+
+Route::post('/guardarproductorpedido','pedidoController@store');
+
+Route::post('/guardarempresaspedido/{idproductor}/','pedidoController@storeempresas');
+
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('evaluacioninicial2/{idproductor}/{idproveedor}','prueba@redireccionar');
 
 Route::get('cancelarcontrato2/{idproductor}/','cancelarContratoController@redireccionar');
 
+Route::get('pedido2/{idproductor}/','pedidoController@redireccionar');
+
+Route::get('pedido3/{idproductor}/{idproveedor}','pedidoController@redireccionar2');
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 Route::post('crearcontrato/{idproductor}/{idproveedor}/','prueba@storeMetodos');
 
 Route::post('cancelarcontrato/{idproductor}','cancelarContratoController@storeContrato');
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('reporteproveedor', function(){
     return view('reporteproveedor');

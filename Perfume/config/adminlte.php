@@ -258,10 +258,12 @@ return [
         ['header' => 'OPCIONES DE COMPRA'],
         [
             'text' => 'Realizar pedido',
-            'url'  => '',
+            'url'  => '/pedidoController',
         ],
-        ['header' => 'RECOMENDADOR',
-         'url'  => '',
+        ['header' => 'RECOMENDADOR'],
+        [
+            'text' => 'Recomendador',
+            'url'  => '',
         ],
         ['header' => 'REPORTES'],
         [
