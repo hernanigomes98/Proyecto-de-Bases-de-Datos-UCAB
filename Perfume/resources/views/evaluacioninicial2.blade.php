@@ -55,6 +55,7 @@
               </div>
             </div>
           </div>
+
           <h5 class="h3 mb-4 text-gray-800">Metodos de pago ofrecidos por el proveedor:</h5>
           <div class="card shadow mb-4">
             <div class="card-body">
@@ -88,11 +89,85 @@
                     @endforeach
                   </tbody>
                 </table>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <h5 class="h3 mb-4 text-gray-800">Materia Prima y Esencias:</h5>
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" name="materia_prima" id="materia_prima" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>nombre</th>
+                      <th>Descripción</th>
+                      <th>Tipo Extracción</th>
+                      <th>Solubilidad</th>
+                      <th></th>
+                    </tr>
+                    @foreach ($producto1 as $pro1)
+                    <tr>
+                    <td>{{$pro1->nombre}}</td>
+                    <td>{{$pro1->descripcion}}</td>
+                        @if ($pro1->tipoextraccion=="ma")
+                            <td>Maceración</td>
+                        @endif
+                        @if ($pro1->tipoextraccion=="ex")
+                            <td>Expresión</td>
+                        @endif
+                        @if ($pro1->tipoextraccion=="de")
+                            <td>Destilación</td>
+                        @endif
+                        @if ($pro1->tipoextraccion=="en")
+                            <td>Enfleurage</td>
+                        @endif
+                        <td>{{$pro1->solubilidad}}%</td>
+                      <td><input type="checkbox" id="materia" name="materia[]" value="{{$pro1->idcnumber}}"></td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+          <h5 class="h3 mb-4 text-gray-800">Otros ingredientes:</h5>
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" name="otro_ingrediente" id="otro_ingrediente" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>nombre</th>
+                      <th>Descripción</th>
+                      <th></th>
+                    </tr>
+                    @foreach ($producto2 as $pro2)
+                    <tr>
+                    <td>{{$pro2->nombre}}</td>
+                    <td>{{$pro2->descripcion}}</td>
+                      <td><input type="checkbox" id="otro" name="otro[]" value="{{$pro2->idotrosing}}"></td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
                 <br>
                 <button type="submit" onClick="alert('Se ha registrado el contrato exitosamente')"> Generar Contrato</button>
               </div>
             </div>
           </div>
+
+
+
+
+
           </form>
         </div>
 

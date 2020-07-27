@@ -7,6 +7,9 @@ use App\productor;
 use App\proveedor;
 use App\metodo_envio;
 use App\pais;
+use App\materiapriesencia;
+use App\otroingrediente;
+use App\com_mapri;
 use App\cond_part;
 use App\contrato;
 use Illuminate\Support\Facades\DB;
@@ -76,8 +79,9 @@ class prueba extends Controller
         $data2=DB::table('proveedor')->where('idproveedor','=',$idproveedor)->first();
         $data3=Db::table('metodo_envio')->join('pais','metodo_envio.fkpais','=','pais.idpais')->where('fk_proveedor', '=', $idproveedor)->paginate();
         $data4=Db::table('metodo_pago')->where('fk_proveedor','=',$idproveedor)->paginate();
-        $data5=Db::table('historico_membresia')->where('fechafin','=',null)->paginate();
-        return view('evaluacioninicial2',["productor"=>$data,"proveedor"=>$data2,"metodo_envio"=>$data3,"metodo_pago"=>$data4, "membresia"=>$data5]);
+        $data5=Db::table('materiapriesencia')->where('fk_proveedor','=',$idproveedor)->paginate();
+        $data6=Db::table('otroingrediente')->where('fk_proveedor','=',$idproveedor)->paginate();
+        return view('evaluacioninicial2',["productor"=>$data,"proveedor"=>$data2,"metodo_envio"=>$data3,"metodo_pago"=>$data4, "producto1"=>$data5, "producto2"=>$data6]);
     }
 
     public function storeMetodos(Request $request,$idproductor,$idproveedor){
@@ -93,6 +97,7 @@ class prueba extends Controller
         $c->recargo=null;
         $c->tiempodescuento=null;
         $c->save();
+
         for ($i=0;$i<count($datametodosenvio);$i++){
             $envios=$datametodosenvio[$i];
             $pais=DB::table('metodo_envio')->select('fkpais')->where('idmetenvio','=',$envios)->first();
@@ -107,7 +112,9 @@ class prueba extends Controller
             $e->fk_proveedorpago=null;
             $e->save();
         }
+
         $datametodospago=$request->get("pago");
+
         for ($i=0;$i<count($datametodospago);$i++){
             $pagos=$datametodospago[$i];
             $p= new cond_part;
@@ -121,6 +128,33 @@ class prueba extends Controller
             $p->fk_proveedorpago=$idproveedor;
             $p->save();
         }
+
+        $materia=$request->get("materia");
+
+        for ($i=0;$i<count($materia);$i++) {
+            $producto=$materia[$i];
+            $m= new com_mapri;
+            $m->idcontrato=$c->idcontrato;
+            $m->idproveedor=$idproveedor;
+            $m->idproductor=$idproductor;
+            $m->idotrosing=null;
+            $m->idmateriapries=$producto;
+            $m->save();
+        }
+
+        $otro=$request->get("otro");
+
+        for ($i=0;$i<count($otro);$i++) {
+            $producto2=$otro[$i];
+            $m= new com_mapri;
+            $m->idcontrato=$c->idcontrato;
+            $m->idproveedor=$idproveedor;
+            $m->idproductor=$idproductor;
+            $m->idotrosing=$producto2;
+            $m->idmateriapries=null;
+            $m->save();
+        }
+
         return redirect('/');
     }
 
