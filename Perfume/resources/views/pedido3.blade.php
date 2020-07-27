@@ -107,15 +107,19 @@
                       <th>Descripcion</th>
                       <th>Tipo extraccion</th>
                       <th>Solubilidad</th>
+                      <th>Volumen</th>
+                      <th>Precio</th>
                       <th></th>
                     </tr>
-                    @foreach ($esencias as $d5)
+                    @foreach ($presentacion as $d5)
                       <tr>
                         <td>{{$d5->idcnumber}}</td>
                         <td>{{$d5->nombre}}</td>
                         <td>{{$d5->descripcion}}</td>
                         <td>{{$d5->tipoextraccion}}</td>
                         <td>{{$d5->solubilidad}} %</td>
+                        <td>{{$d5->volml}}</td>
+                        <td>{{$d5->precio}}</td>
                         <td><input type="checkbox" id="materiapries" name="materiapries[]" value="{{$d5->idcnumber}}"></td>
                       </tr>
                     @endforeach
@@ -136,14 +140,18 @@
                       <th>Tscacas</th>
                       <th>Nombre</th>
                       <th>Descripcion</th>
+                      <th>Volumen</th>
+                      <th>Precio</th>
                       <th></th>
                     </tr>
-                    @foreach ($otrosin as $d6)
+                    @foreach ($otroing as $d6)
                       <tr>
                         <td>{{$d6->ipc}}</td>
                         <td>{{$d6->tscacas}}</td>
                         <td>{{$d6->nombre}}</td>
                         <td>{{$d6->descripcion}}</td>
+                        <td>{{$d6->volml}}</td>
+                        <td>{{$d6->precio}}</td>
                         <td><input type="checkbox" id="materiapries" name="otrosin[]" value="{{$d6->idotrosing}}"></td>
                       </tr>
                     @endforeach
