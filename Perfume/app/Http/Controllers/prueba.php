@@ -50,7 +50,7 @@ class prueba extends Controller
     {
         $data=$request->get('proveedor');
         $data2=$request->get('productor');
-        $data3=Db::table('contrato')->select('motivocancelacion')->where('fk_productor', '=', $data2)->where('fk_proveedor', '=', $data)->first();
+        $data3=Db::table('contrato')->select('motivocancelacion')->where('fk_productor', '=', $data2)->where('fk_proveedor', '=', $data)->orderBy('idcontrato','DESC')->first();
 
         if (($data == 0) || ($data2 == 0)) {
             return redirect('evaluacionFallida2/');
