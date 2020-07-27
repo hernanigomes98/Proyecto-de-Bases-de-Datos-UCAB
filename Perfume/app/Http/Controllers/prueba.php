@@ -23,7 +23,7 @@ class prueba extends Controller
         //$data4=Db::table('proveedor')->where('nombre', '=', $request->get('proveedor'))->paginate();
         $data=db::table('productor')->paginate();
         $data2=proveedor::all();
-        $data3=Db::table('metodo_envio')->join('pais','metodo_envio.fkpais','=','pais.idpais')->where('fk_proveedor', '=', 2)->paginate();
+        $data3=Db::table('contrato')->where('fk_productor', '=', 4)->where('fk_proveedor', '=', 4)->paginate();
         $data4=Db::table('metodo_pago')->where('fk_proveedor','=',2)->paginate();
         $data5=Db::table('historico_membresia')->paginate();
         return view('evaluacioninicial', ["data" => $data, "data2" => $data2, "data3" => $data3, "data4"=>$data4, 'data5'=>$data5]);
@@ -50,8 +50,25 @@ class prueba extends Controller
     {
         $data=$request->get('proveedor');
         $data2=$request->get('productor');
-        //return view('evaluacioninicial', ["data" => $data, "data2" => $data2]);
+        $data3=Db::table('contrato')->select('motivocancelacion')->where('fk_productor', '=', $data2)->where('fk_proveedor', '=', $data)->first();
+
+        if (($data == 0) || ($data2 == 0)) {
+            return redirect('evaluacionFallida2/');
+
+        }elseif ($data3 == null) {
+
+            return redirect('evaluacioninicial2/'.$data2.'/'.$data.'');
+        //return redirect('evaluacionFallida/');
+
+        }elseif ($data3->motivocancelacion !== null) {
+
         return redirect('evaluacioninicial2/'.$data2.'/'.$data.'');
+
+        }else {
+
+            return redirect('evaluacionFallida/');
+        }
+
     }
 
     public function redireccionar($idproductor,$idproveedor){

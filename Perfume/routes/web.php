@@ -164,3 +164,11 @@ Route::get('FiltroRecomendador',function(){
 Route::get('Recomendador', function(){
     return view('Recomendador');
 });
+
+Route::get('evaluacionFallida', function(){
+    return view('evaluacionFallida');
+});
+
+Route::get('evaluacionFallida2', function(){
+    return view('evaluacionFallida2');
+});

@@ -51,10 +51,6 @@ $inf=null;
                                 @endforeach
                             </select>
                           </div>
-
-
-
-
                     <div class="col-sm">
                         <button type="submit"> Seleccionar</button>
                     </div>
