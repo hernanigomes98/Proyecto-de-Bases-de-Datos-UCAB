@@ -1,6 +1,10 @@
 @extends('adminlte::page')
 @section('content')
 
+@php
+$inf=null;
+@endphp
+
 <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
@@ -20,15 +24,37 @@
                           @endforeach
                       </select>
                     </div>
-                    <div class="col-sm">
-                      <a>Proveedor: </a>
-                      <select id="proveedor" name="proveedor" class="select-css">
-                          <option selected="selected" value="0"->Ninguno</option>
-                          @foreach ($data2 as $d2)
-                              <option value="{{$d2->idproveedor}}">{{$d2->nombre}}</option>
-                          @endforeach
-                      </select>
-                    </div>
+
+                        <div class="col-sm">
+                            <a>Proveedores miembros del IFRA:</a>
+                            <select name="proveedor" class="select-css">
+                                <option selected="selected" value="0"->Ninguno</option>
+                                @foreach ($data2 as $d2)
+                                @foreach ($data5 as $d5)
+
+                                @if (($d2->idproveedor==$d5->fk_proveedor) && ($d5->fechafin==null))
+                                  @if ($d2->nombre!==$inf)
+
+
+
+
+                                    <option value="{{$d2->idproveedor}}">{{$d2->nombre}}</option>
+                                      @php
+                                      $inf=$d2->nombre;
+                                      @endphp
+
+                                  @endif
+                                @endif
+
+                                @endforeach
+
+                                @endforeach
+                            </select>
+                          </div>
+
+
+
+
                     <div class="col-sm">
                         <button type="submit"> Seleccionar</button>
                     </div>
