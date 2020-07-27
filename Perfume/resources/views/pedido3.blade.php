@@ -110,17 +110,30 @@
                       <th>Volumen</th>
                       <th>Precio</th>
                       <th></th>
+                      <th>Cantidad</th>
                     </tr>
                     @foreach ($presentacion as $d5)
                       <tr>
                         <td>{{$d5->idcnumber}}</td>
                         <td>{{$d5->nombre}}</td>
                         <td>{{$d5->descripcion}}</td>
-                        <td>{{$d5->tipoextraccion}}</td>
+                            @if ($d5->tipoextraccion=="ma")
+                                <td>Maceracion</td>
+                            @endif
+                            @if ($d5->tipoextraccion=="ex")
+                                <td>Expresion</td>
+                            @endif
+                            @if ($d5->tipoextraccion=="de")
+                                <td>Destilacion</td>
+                            @endif
+                            @if ($d5->tipoextraccion=="en")
+                                <td>Enfleurage</td>
+                            @endif
                         <td>{{$d5->solubilidad}} %</td>
-                        <td>{{$d5->volml}}</td>
+                        <td>{{$d5->volml}} ml</td>
                         <td>{{$d5->precio}}</td>
-                        <td><input type="checkbox" id="materiapries" name="materiapries[]" value="{{$d5->idcnumber}}"></td>
+                        <td><input type="checkbox" id="materipries" name="materiapries[]" value="{{$d5->idcnumber}}"></td>
+                        <td><input type="number" id="cantidadmapri" name="cantidadmapri"></td>
                       </tr>
                     @endforeach
                   </tbody>
@@ -143,6 +156,7 @@
                       <th>Volumen</th>
                       <th>Precio</th>
                       <th></th>
+                      <th>Cantidad</th>
                     </tr>
                     @foreach ($otroing as $d6)
                       <tr>
@@ -152,7 +166,8 @@
                         <td>{{$d6->descripcion}}</td>
                         <td>{{$d6->volml}}</td>
                         <td>{{$d6->precio}}</td>
-                        <td><input type="checkbox" id="materiapries" name="otrosin[]" value="{{$d6->idotrosing}}"></td>
+                        <td><input type="checkbox" id="envio" name="otrosin[]" value="{{$d6->idotrosing}}"></td>
+                        <td><input type="number" id="cantidadotrosing" name="cantidadotrosing"></td>
                       </tr>
                     @endforeach
                   </tbody>

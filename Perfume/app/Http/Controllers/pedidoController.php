@@ -67,10 +67,10 @@ class pedidoController extends Controller
         $data=DB::table('productor')->where('idproductor','=',$idproductor)->first();
         $data2=DB::table('proveedor')->where('idproveedor','=',$idproveedor)->first();
         $contrato=DB::table('contrato')->where('fk_productor','=',$idproductor)->where('fk_proveedor','=',$data2->idproveedor)->where('fechacancelacion','=',null)->first();
-        $data3=DB::table('com_mapri')->join('materiapriesencia','com_mapri.idmateriapries','=','materiapriesencia.idcnumber')->where('idcontrato','=',$contrato->idcontrato)->where('idotrosing','=',null)->paginate();
+        // $data3=DB::table('com_mapri')->join('materiapriesencia','com_mapri.idmateriapries','=','materiapriesencia.idcnumber')->where('idcontrato','=',$contrato->idcontrato)->where('idotrosing','=',null)->paginate();
         $data4=Db::table('cond_part')->join('metodo_envio','cond_part.fk_metenvio','=','metodo_envio.idmetenvio')->join('pais','metodo_envio.fkpais','=','pais.idpais')->where('fk_contrato','=',$contrato->idcontrato)->where('fk_metenvio','!=',null)->paginate();
         $data5=Db::table('cond_part')->join('metodo_pago','cond_part.fk_metpago','=','metodo_pago.idmetpago')->where('fk_contrato','=',$contrato->idcontrato)->where('fk_metpago','!=',null)->paginate();
-        $data6=DB::table('com_mapri')->join('otroingrediente','com_mapri.idotrosing','=','otroingrediente.idotrosing')->where('idcontrato','=',$contrato->idcontrato)->where('idmateriapries','=',null)->paginate();
+        // $data6=DB::table('com_mapri')->join('otroingrediente','com_mapri.idotrosing','=','otroingrediente.idotrosing')->where('idcontrato','=',$contrato->idcontrato)->where('idmateriapries','=',null)->paginate();
         $data7 = DB::table('materiapriesencia')
             ->join('com_mapri', 'com_mapri.idmateriapries', '=', 'materiapriesencia.idcnumber')
             ->join('pres_ing', 'pres_ing.idmateriapries', '=', 'materiapriesencia.idcnumber')
@@ -83,7 +83,7 @@ class pedidoController extends Controller
             ->where('com_mapri.idcontrato', '=', $contrato->idcontrato)
             ->select('otroingrediente.*', 'pres_ing.volml', 'pres_ing.precio')
             ->paginate();
-        return view('pedido3',["productor"=>$data,"proveedor"=>$data2,"esencias"=>$data3,"envios"=>$data4,"pagos"=>$data5,"otrosin"=>$data6,"presentacion"=>$data7,"otroing"=>$data8]);
+        return view('pedido3',["productor"=>$data,"proveedor"=>$data2,"envios"=>$data4,"pagos"=>$data5,"presentacion"=>$data7,"otroing"=>$data8]);
     }
 
     public function crearpedido ($productor,$proveedor){
