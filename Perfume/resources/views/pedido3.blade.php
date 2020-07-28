@@ -20,7 +20,7 @@
     <br>
 
 
-    <form action="{{url ('crearcontrato/'.$productor->idproductor.'/'.$proveedor->idproveedor.'')}}" method="POST">
+    <form action="{{url ('crearpedido/'.$productor->idproductor.'/'.$proveedor->idproveedor.'')}}" method="POST">
         @csrf
       <h5 class="h3 mb-4 text-gray-800">Metodos de envio ofrecidos por el proveedor:</h5>
       <div class="card shadow mb-4">
@@ -48,7 +48,7 @@
                     @endif
                     <td>{{$d3->nombrepais}}</td>
                     <td>{{$d3->costoadicional}}</td>
-                    <td><input type="checkbox" id="envio" name="envio[]" value="{{$d3->idmetenvio}}"></td>
+                    <td><input type="radio" id="envio" name="envio" value="{{$d3->id_conpart}}"></td>
                 </tr>
                 @endforeach
 
@@ -86,7 +86,7 @@
                         @endif
                         <td>{{$d4->porcentajecuota}} %</td>
                         <td>{{$d4->tiempocuota}} meses</td>
-                      <td><input type="checkbox" id="pago" name="pago[]" value="{{$d4->idmetpago}}"></td>
+                      <td><input type="radio" id="pago" name="pago" value="{{$d4->id_conpart}}"></td>
                       </tr>
                     @endforeach
                   </tbody>
@@ -132,8 +132,8 @@
                         <td>{{$d5->solubilidad}} %</td>
                         <td>{{$d5->volml}} ml</td>
                         <td>{{$d5->precio}}</td>
-                        <td><input type="checkbox" id="materipries" name="materiapries[]" value="{{$d5->idcnumber}}"></td>
-                        <td><input type="number" id="cantidadmapri" name="cantidadmapri"></td>
+                        <td><input type="checkbox" id="materipries" name="materiapries[]" value="{{$d5->idpresing}}"></td>
+                        <td><input type="number" id="cantidadmapri" name="cantidadmapri[]"></td>
                       </tr>
                     @endforeach
                   </tbody>
@@ -165,9 +165,9 @@
                         <td>{{$d6->nombre}}</td>
                         <td>{{$d6->descripcion}}</td>
                         <td>{{$d6->volml}}</td>
-                        <td>{{$d6->precio}}</td>
-                        <td><input type="checkbox" id="envio" name="otrosin[]" value="{{$d6->idotrosing}}"></td>
-                        <td><input type="number" id="cantidadotrosing" name="cantidadotrosing"></td>
+                        <td>{{$d6->precio}} $</td>
+                        <td><input type="checkbox" id="otrosin" name="otrosin[]" value="{{$d6->idpresing}}"></td>
+                        <td><input type="number" id="cantidadotrosing" name="cantidadotrosing[]"></td>
                       </tr>
                     @endforeach
                   </tbody>
@@ -176,7 +176,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" onClick="alert('Se ha registrado el contrato exitosamente')"> Generar Contrato</button>
+          <button type="submit" onclick="return confirm('¿Desea realizar el pedido?')"> Generar pedido</button>
     </form>
 </div>
 

@@ -155,6 +155,7 @@ Route::post('crearevaluacion/{idproductor}/{idproveedor}/{Ubi}/{envio}/{pago}/{t
 
 Route::post('cancelarcontrato/{idproductor}','cancelarContratoController@storeContrato');
 
+Route::post('crearpedido/{idproductor}/{idproveedor}','pedidoController@crearpedido');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('reporteproveedor', function(){
