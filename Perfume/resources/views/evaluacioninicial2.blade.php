@@ -3,7 +3,7 @@
 <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Realizar evaluacion</h1>
+          <h1 class="h3 mb-4 text-gray-800">Realizar contrato</h1>
           <!-- Select productor -->
           <div class="container">
             <div class="row">
