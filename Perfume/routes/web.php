@@ -147,6 +147,7 @@ Route::post('crearcontrato/{idproductor}/{idproveedor}/','prueba@storeMetodos');
 
 Route::post('cancelarcontrato/{idproductor}','cancelarContratoController@storeContrato');
 
+Route::post('crearpedido/{idproductor}/{idproveedor}','pedidoController@crearpedido');
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('reporteproveedor', function(){
