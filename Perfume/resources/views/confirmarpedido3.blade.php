@@ -19,6 +19,10 @@
             <a>Fecha de solicitud: </a>
             <label>{{$pedido->fecha}}</label>
         </div>
+        <div class="col-sm">
+            <a>Total: </a>
+            <label>{{$pedido->total}}</label>
+        </div>
       </div>
       @if ($envio!=null)
       <br>

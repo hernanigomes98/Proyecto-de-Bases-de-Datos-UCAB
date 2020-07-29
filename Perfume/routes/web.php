@@ -118,8 +118,11 @@ Route::resource('pedidoController', 'pedidoController');
 
 Route::resource('confirmarpedido', 'confirmarPedidoController');
 
-/////////////////////////////////////////////////////////////////////////////////////////
+Route::resource('generarpagos','pagosController');
+
 Route::resource('RecomendadorController', 'RecomendadorController');
+
+////////////////////////////////////////////////////////////////////////////////
 
 Route::post('/guardar', 'prueba@store');
 
@@ -134,6 +137,8 @@ Route::post('/guardarproductorpedido','pedidoController@store');
 Route::post('/guardarempresaspedido/{idproductor}/','pedidoController@storeempresas');
 
 Route::post('/guardarproveedor', 'confirmarPedidoController@store');
+
+Route::post('/guardarproductorpago','pagosController@store');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 

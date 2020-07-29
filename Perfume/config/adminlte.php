@@ -264,6 +264,10 @@ return [
             'text' => 'Confirmar pedido',
             'url'  => '/confirmarpedido',
         ],
+        [
+            'text' => 'Generar pagos pedidos',
+            'url'  => '/generarpagos',
+        ],
         ['header' => 'RECOMENDADOR'],
         [
         'text' => 'Recomendador',
