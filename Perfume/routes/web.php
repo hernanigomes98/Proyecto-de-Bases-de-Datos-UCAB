@@ -123,6 +123,8 @@ Route::resource('RecomendadorController', 'RecomendadorController');
 
 Route::post('/guardar', 'prueba@store');
 
+Route::post('/guardar2/{idproductor}/{idproveedor}', 'prueba@store2');
+
 Route::post('/guardarR', 'RecomendadorController@store');
 
 Route::post('/guardarproductor','cancelarContratoController@store');
@@ -136,6 +138,10 @@ Route::post('/guardarproveedor', 'confirmarPedidoController@store');
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('evaluacioninicial2/{idproductor}/{idproveedor}','prueba@redireccionar');
+
+Route::get('evaluacion/{idproductor}/{idproveedor}','prueba@redireccionarevaluacion');
+
+Route::get('evaluacion2/{idproductor}/{idproveedor}/{Ubi}/{envio}/{pago}/','prueba@redireccionarevaluacion2');
 
 Route::get('Recomendador/{idproductor}/{idfamiliaolfativa}/{idperfume}','RecomendadorController@redireccionar');
 
@@ -155,6 +161,8 @@ Route::post('aprobarpedido/{idpedido}','confirmarPedidoController@confirmar');
 Route::post('rechazarpedido/{idpedido}','confirmarPedidoController@rechazar');
 
 Route::post('crearcontrato/{idproductor}/{idproveedor}/','prueba@storeMetodos');
+
+Route::post('crearevaluacion/{idproductor}/{idproveedor}/{Ubi}/{envio}/{pago}/{total}/','prueba@storeMetodos2');
 
 Route::post('cancelarcontrato/{idproductor}','cancelarContratoController@storeContrato');
 
