@@ -98,23 +98,23 @@ class pedidoController extends Controller
         $total=0;
         $cantidad[]=null;
         $cantidadotros[]=null;
-        for ($i=0;$i<count($cantidadotrosing);$i++){
-             if($cantidadotrosing[$i]!=null){
-                array_push($cantidadotros,$cantidadotrosing[$i]);
-            }
-        };
-        for ($c=0;$c<count($cantidadesmateriapri);$c++){
-            if($cantidadesmateriapri[$c]!=null){
-               array_push($cantidad,$cantidadesmateriapri[$c]);
-           }
-        };
         if ($datamateriapri!=null){
+            for ($c=0;$c<count($cantidadesmateriapri);$c++){
+                if($cantidadesmateriapri[$c]!=null){
+                   array_push($cantidad,$cantidadesmateriapri[$c]);
+               }
+            };
         for ($e=0;$e<count($datamateriapri);$e++){
             $materiapri=db::table('pres_ing')->where('idpresing','=',$datamateriapri[$e])->select('pres_ing.precio')->first();
             $total=$total+($cantidad[$e+1]*$materiapri->precio);
         };
         }
         if ($dataotrosing!=null){
+            for ($i=0;$i<count($cantidadotrosing);$i++){
+                if($cantidadotrosing[$i]!=null || $cantidadotrosing[$i]!=1000){
+                   array_push($cantidadotros,$cantidadotrosing[$i]);
+               }
+           };
         for ($b=0;$b<count($dataotrosing);$b++){
             $otroing=db::table('pres_ing')->where('idpresing','=',$dataotrosing[$b])->select('pres_ing.precio')->first();
             $total=$total+($cantidadotros[$b+1]*$otroing->precio);
@@ -129,8 +129,8 @@ class pedidoController extends Controller
         $p->fechaconfir=null;
         $p->nfactura=null;
         $p->fk_condpartcontrato=$contrato->idcontrato;
-        $p->fk_condpartpago=$metodoenvio;
-        $p->fk_condpartenvio=$metodopago;
+        $p->fk_condpartpago=$metodopago;
+        $p->fk_condpartenvio=$metodoenvio;
         $p->fk_condpartprov=$idproveedor;
         $p->fk_condpartprod=$idproductor;
         $p->save();

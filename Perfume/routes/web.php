@@ -116,6 +116,8 @@ Route::resource('cancelarContratoController', 'cancelarContratoController');
 
 Route::resource('pedidoController', 'pedidoController');
 
+Route::resource('confirmarpedido', 'confirmarPedidoController');
+
 /////////////////////////////////////////////////////////////////////////////////////////
 Route::resource('RecomendadorController', 'RecomendadorController');
 
@@ -129,6 +131,8 @@ Route::post('/guardarproductorpedido','pedidoController@store');
 
 Route::post('/guardarempresaspedido/{idproductor}/','pedidoController@storeempresas');
 
+Route::post('/guardarproveedor', 'confirmarPedidoController@store');
+
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('evaluacioninicial2/{idproductor}/{idproveedor}','prueba@redireccionar');
@@ -141,7 +145,14 @@ Route::get('pedido2/{idproductor}/','pedidoController@redireccionar');
 
 Route::get('pedido3/{idproductor}/{idproveedor}','pedidoController@redireccionar2');
 
+Route::get('confirmarpedido2/{idproveedor}', 'confirmarPedidoController@redireccionar');
+
+Route::get('confirmarpedido3/{idproveedor}', 'confirmarPedidoController@redireccionar2');
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::post('aprobarpedido/{idpedido}','confirmarPedidoController@confirmar');
+
+Route::post('rechazarpedido/{idpedido}','confirmarPedidoController@rechazar');
 
 Route::post('crearcontrato/{idproductor}/{idproveedor}/','prueba@storeMetodos');
 
