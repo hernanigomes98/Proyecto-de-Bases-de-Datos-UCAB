@@ -76,10 +76,19 @@ class confirmarPedidoController extends Controller
 
     public function confirmar($idpedido, Request $request){
         $factura=$request->get("factura");
-        $aprobar:pedido::findOrFail($idpedido);
+        $aprobar=pedido::findOrFail($idpedido);
+        $aprobar->status="a";
         $aprobar->fechaconfir=date('Y-m-d', strtotime('now'));
         $aprobar->nfactura=$factura;
         $aprobar->update();
+        return redirect('/');
+    }
+
+    public function reprobar($idpedido){
+        $reprobar=pedido::findOrFail($idpedido);
+        $reprobar->status="r";
+        $reprobar->fechaconfir=date('Y-m-d', strtotime('now'));
+        $reprobar->update();
         return redirect('/');
     }
     /**

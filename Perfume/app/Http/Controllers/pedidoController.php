@@ -153,7 +153,7 @@ class pedidoController extends Controller
             };
         }
 
-        return($total);
+        return redirect('/');
     }
 
     /**

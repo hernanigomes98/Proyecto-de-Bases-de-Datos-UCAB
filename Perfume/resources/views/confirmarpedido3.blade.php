@@ -151,13 +151,14 @@
                 @csrf
                 <a>Numero de Factura:</a>
                 <input type="number" id="factura" name="factura">
-                <button type="submit">Aprobar</button>
+                <button type="submit" onclick="return confirm('¿Desea aprobar el pedido?')">Aprobar</button>
             </form>
         </div>
         <div class="col">
-            {{-- <form action="{{url ('rechazarpedido/'.$pedido->idpedido.'')}}" method="post">
-                <button type="submit">Rechazar</button>
-            </form> --}}
+            <form action="{{url ('rechazarpedido/'.$pedido->idpedido.'')}}" method="post">
+                @csrf
+                <button type="submit" onclick="return confirm('¿Desea rechazar el pedido?')">Rechazar</button>
+            </form>
         </div>
     </div>
 @endsection

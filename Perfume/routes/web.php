@@ -166,7 +166,7 @@ Route::get('confirmarpedido3/{idproveedor}', 'confirmarPedidoController@redirecc
 
 Route::post('aprobarpedido/{idpedido}','confirmarPedidoController@confirmar');
 
-Route::post('rechazarpedido/{idpedido}','confirmarPedidoController@rechazar');
+Route::post('rechazarpedido/{idpedido}','confirmarPedidoController@reprobar');
 
 Route::post('crearcontrato/{idproductor}/{idproveedor}/','prueba@storeMetodos');
 
