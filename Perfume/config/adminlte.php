@@ -248,7 +248,7 @@ return [
         ],
         [
             'text' => 'Renovacion Contrato',
-            'url'  => '',
+            'url'  => '/RenovarController',
         ],
         [
             'text' => 'Cancelar Contrato',
