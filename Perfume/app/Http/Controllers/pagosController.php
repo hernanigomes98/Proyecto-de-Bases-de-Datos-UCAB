@@ -48,8 +48,20 @@ class pagosController extends Controller
     public function store(Request $request)
     {
         //
+        $data=$request->get('productor');
+        return redirect('generarpago2/'.$data.'/');
     }
 
+    public function redireccionar($idproductor){
+        $data=DB::table('productor')->where('idproductor','=',$idproductor)->first();
+        $data2=DB::table('pedido')->where('fk_idprod','=',$idproductor)->paginate();
+        if($data2!=null){
+            for ($c=0;$c<count($data2);$c++){
+
+            }
+        }
+        return view('generarpago2',["productor"=>$data,"contrato"=>$data2]);
+    }
     /**
      * Display the specified resource.
      *

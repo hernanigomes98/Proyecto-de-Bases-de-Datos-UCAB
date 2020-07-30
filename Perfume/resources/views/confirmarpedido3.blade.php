@@ -151,7 +151,7 @@
     @endif
     <div class="row">
         <div class="col">
-            <form action="{{url ('aprobarpedido/'.$pedido->idpedido.'')}}" method="post">
+            <form action="{{url ('aprobarpedido/'.$pedido->idpedido.'/'.$pago->idmetpago)}}" method="post">
                 @csrf
                 <a>Numero de Factura:</a>
                 <input type="number" id="factura" name="factura">

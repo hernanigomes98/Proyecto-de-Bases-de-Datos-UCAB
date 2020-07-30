@@ -14,6 +14,7 @@ use App\metodo_pago;
 use App\materiapriesencia;
 use App\otroingrediente;
 use App\pres_ing;
+use App\historico_pago;
 
 class confirmarPedidoController extends Controller
 {
@@ -74,13 +75,28 @@ class confirmarPedidoController extends Controller
         return view('confirmarpedido3',["pedido"=>$data,"proveedor"=>$data2,"productor"=>$data3,"envio"=>$data4,"pais"=>$data5,"pago"=>$data6,"materiapri"=>$data7,"otrosing"=>$data8]);
     }
 
-    public function confirmar($idpedido, Request $request){
+    public function confirmar($idpedido,$idmetpago,Request $request){
         $factura=$request->get("factura");
         $aprobar=pedido::findOrFail($idpedido);
         $aprobar->status="a";
         $aprobar->fechaconfir=date('Y-m-d', strtotime('now'));
         $aprobar->nfactura=$factura;
         $aprobar->update();
+        $pedido=DB::table('pedido')->where('idpedido','=',$idpedido)->first();
+        $metpago=DB::table('metodo_pago')->where('idmetpago','=',$idmetpago)->first();
+        $numerocuotas=100/$metpago->porcentajecuota;
+        $totalcuotas=$pedido->total*($metpago->porcentajecuota/100);
+        return view ('generarpago',["pedido"=>$pedido,"pago"=>$metpago,"numcuotas"=>$numerocuotas,"totalcuotas"=>$totalcuotas]);
+    }
+
+    public function generarpagos($idpedido,$numpagos,$montopagos){
+        for ($i=0;$i<$numpagos;$i++){
+            $p= new historico_pago();
+            $p->monto=$montopagos;
+            $p->fecha=date('Y-m-d', strtotime('now'));
+            $p->fk_pedido=$idpedido;
+            $p->save();
+        }
         return redirect('/');
     }
 

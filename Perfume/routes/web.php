@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pagosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -159,9 +160,12 @@ Route::get('pedido3/{idproductor}/{idproveedor}','pedidoController@redireccionar
 Route::get('confirmarpedido2/{idproveedor}', 'confirmarPedidoController@redireccionar');
 
 Route::get('confirmarpedido3/{idproveedor}', 'confirmarPedidoController@redireccionar2');
-///////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::post('aprobarpedido/{idpedido}','confirmarPedidoController@confirmar');
+Route::get('generarpago2/{idproductor}', 'pagosController@redireccionar');
+///////////////////////////////////////////////////////////////////////////////////////////////
+Route::post('generarpagostodos/{idpedido}/{numpagos}/{montopagos}','confirmarPedidoController@generarpagos');
+
+Route::post('aprobarpedido/{idpedido}/{idmetpago}','confirmarPedidoController@confirmar');
 
 Route::post('rechazarpedido/{idpedido}','confirmarPedidoController@reprobar');
 
