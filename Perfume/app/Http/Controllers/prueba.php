@@ -24,7 +24,6 @@ class prueba extends Controller
      */
     public function index()
     {
-        //$data4=Db::table('proveedor')->where('nombre', '=', $request->get('proveedor'))->paginate();
         $data=db::table('productor')->paginate();
         $data2=proveedor::all();
         $data3=Db::table('contrato')->where('fk_productor', '=', 4)->where('fk_proveedor', '=', 4)->paginate();

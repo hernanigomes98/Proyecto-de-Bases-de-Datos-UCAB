@@ -113,6 +113,8 @@ Route::get('/', function () {
 
 Route::resource('prueba', 'prueba');
 
+Route::resource('RenovarController', 'RenovarController');
+
 Route::resource('cancelarContratoController', 'cancelarContratoController');
 
 Route::resource('pedidoController', 'pedidoController');
@@ -127,7 +129,11 @@ Route::resource('RecomendadorController', 'RecomendadorController');
 
 Route::post('/guardar', 'prueba@store');
 
+Route::post('/verificarR', 'RenovarController@store');
+
 Route::post('/guardar2/{idproductor}/{idproveedor}', 'prueba@store2');
+
+Route::post('/guardarRenovacion/{idproductor}/{idproveedor}', 'prueba@store2');
 
 Route::post('/guardarR', 'RecomendadorController@store');
 
@@ -146,6 +152,8 @@ Route::post('/guardarproductorpago','pagosController@store');
 Route::get('evaluacioninicial2/{idproductor}/{idproveedor}','prueba@redireccionar');
 
 Route::get('evaluacion/{idproductor}/{idproveedor}','prueba@redireccionarevaluacion');
+
+Route::get('renovar2/{idproductor}/{idproveedor}','RenovarController@redireccionarenovacion');
 
 Route::get('evaluacion2/{idproductor}/{idproveedor}/{Ubi}/{envio}/{pago}/','prueba@redireccionarevaluacion2');
 
