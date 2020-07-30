@@ -8,7 +8,7 @@ class resultado extends Model
 {
     //
     protected $table = 'resultado';
-    protected $primaryKey = 'fechaevaluado';
-    public $filleable = ['resultado', 'tipoevaluacion', 'fk_proveedor', 'fk_productor'];
+    protected $primaryKey = 'idresultado';
+    public $filleable = ['fechaevaluado','resultado', 'tipoevaluacion', 'fk_proveedor', 'fk_productor'];
     public $timestamps = false;
 }

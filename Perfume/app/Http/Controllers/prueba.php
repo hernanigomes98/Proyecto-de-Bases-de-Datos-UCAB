@@ -13,6 +13,7 @@ use App\com_mapri;
 use App\cond_part;
 use App\contrato;
 use App\criterio_peso;
+use App\resultado;
 use Illuminate\Support\Facades\DB;
 
 class prueba extends Controller
@@ -200,6 +201,14 @@ class prueba extends Controller
     public function storeMetodos2(Request $request,$idproductor,$idproveedor,$Ubi,$nevio,$pago,$total){
         $int_cast = (int)$total;
 
+        $resul= new resultado;
+        $resul->fechaevaluado=date('Y-m-d', strtotime('now'));
+        $resul->resultado="a";
+        $resul->tipoevaluacion="i";
+        $resul->fk_proveedor=$idproveedor;
+        $resul->fk_productor=$idproductor;
+        $resul->save();
+
         $cp1= new criterio_peso;
         $cp1->fechainicio=date('Y-m-d', strtotime('now'));
         $cp1->fechafin=null;
@@ -226,6 +235,8 @@ class prueba extends Controller
         $cp3->fk_criterio=2;
         $cp3->fk_productor=$idproductor;
         $cp3->save();
+
+
 
         return redirect('evaluacioninicial2/'.$idproductor.'/'.$idproveedor.'');
     }

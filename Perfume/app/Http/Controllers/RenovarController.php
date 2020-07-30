@@ -13,6 +13,7 @@ use App\com_mapri;
 use App\cond_part;
 use App\contrato;
 use App\criterio_peso;
+use App\resultado;
 use Illuminate\Support\Facades\DB;
 
 class RenovarController extends Controller
@@ -73,6 +74,15 @@ class RenovarController extends Controller
 
     public function store4($idproductor,$idproveedor,$obtenido,$rango)
     {
+
+        $resul= new resultado;
+        $resul->fechaevaluado=date('Y-m-d', strtotime('now'));
+        $resul->resultado="a";
+        $resul->tipoevaluacion="a";
+        $resul->fk_proveedor=$idproveedor;
+        $resul->fk_productor=$idproductor;
+        $resul->save();
+
         $cp1= new criterio_peso;
         $cp1->fechainicio=date('Y-m-d', strtotime('now'));
         $cp1->fechafin=null;

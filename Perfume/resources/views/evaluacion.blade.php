@@ -22,7 +22,7 @@
             @csrf
 
 
-            <h3>Ubicación del Proveedor: {{$ubicacion->nombrepais}}</h3><input type="number" id="Ubi" name="Ubi" min="0" max="100">
+            <h3>Ubicación del Proveedor: {{$ubicacion->nombrepais}}</h3><a>Calificacion:</a><input type="number" id="Ubi" name="Ubi" min="0" max="100">
 
           <h5 class="h3 mb-4 text-gray-800">Metodos de envio ofrecidos por el proveedor:</h5>
           <div class="card shadow mb-4">
@@ -55,6 +55,7 @@
 
                   </tbody>
                 </table>
+                <a>Calificacion:</a>
                 <input type="number" id="envio" name="envio" min="0" max="100">
               </div>
             </div>
@@ -92,6 +93,7 @@
                     @endforeach
                   </tbody>
                 </table>
+                <a>Calificacion:</a>
                 <input type="number" id="pago" name="pago" min="0" max="100">
               </div>
             </div>
