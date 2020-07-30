@@ -50,38 +50,94 @@ class RenovarController extends Controller
     {
         $data=$request->get('proveedor');
         $data2=$request->get('productor');
-        $data3=Db::table('contrato')->select('motivocancelacion')->where('fk_productor', '=', $data2)->where('fk_proveedor', '=', $data)->orderBy('idcontrato','DESC')->first();
 
-        if (($data == 0) || ($data2 == 0)) {
-            return redirect('renovacionFallida/');
+        return redirect('renovar2/'.$data2.'/'.$data.'');
 
-        }elseif ($data3 == null) {
+    }
 
-        //return redirect('renovar2/'.$data2.'/'.$data.'');
-        return redirect('renovacionFallida/');
+    public function store2(Request $request,$idproductor,$idproveedor,$cont1,$cont2)
+    {
+        $data=$idproveedor;
+        $data2=$idproductor;
 
-        }elseif ($data3->motivocancelacion !== null) {
+        return redirect('renovar3/'.$data2.'/'.$data.'/'.$cont1.'/'.$cont2.'');
+    }
 
-        return redirect('renovacionFallida/');
-        //return redirect('renovar2/'.$data2.'/'.$data.'');
+    public function store3($idproductor,$idproveedor)
+    {
+        $data=$idproveedor;
+        $data2=$idproductor;
 
-        }else {
+        return redirect('cancelarRenovar/'.$data2.'/'.$data.'');
+    }
 
-            //return redirect('renovacionFallida/');
-            return redirect('renovar2/'.$data2.'/'.$data.'');
+    public function store4($idproductor,$idproveedor,$obtenido,$rango)
+    {
+        $cp1= new criterio_peso;
+        $cp1->fechainicio=date('Y-m-d', strtotime('now'));
+        $cp1->fechafin=null;
+        $cp1->peso=$obtenido;
+        $cp1->tipoformula="(Criterio de pedidos comparado al Criterio de exito)";
+        $cp1->fk_criterio=3;
+        $cp1->fk_productor=$idproductor;
+        $cp1->save();
 
-        }
+        $cp2= new criterio_peso;
+        $cp2->fechainicio=date('Y-m-d', strtotime('now'));
+        $cp2->fechafin=null;
+        $cp2->peso=$obtenido;
+        $cp2->tipoformula="(Criterio de pedidos comparado al Criterio de exito)";
+        $cp2->fk_criterio=5;
+        $cp2->fk_productor=$idproductor;
+        $cp2->save();
+
+        $contrato=DB::table('contrato')->where('fk_proveedor','=',$idproveedor)->where('fk_productor','=',$idproductor)->orderBy('idcontrato','DESC')->first();
+        $motivo="renovacion";
+        $cancelar=contrato::findOrFail($contrato->idcontrato);
+        $cancelar->fechacancelacion=date('Y-m-d', strtotime('now'));
+        $cancelar->motivocancelacion=$motivo;
+        $cancelar->update();
+
+        return redirect('evaluacioninicial2/'.$idproductor.'/'.$idproveedor.'');
+    }
+
+    public function storeContrato(Request $request,$idproductor,$idproveedor){
+        $contrato=DB::table('contrato')->where('fk_proveedor','=',$idproveedor)->where('fk_productor','=',$idproductor)->orderBy('idcontrato','DESC')->first();
+        $motivo=$request->get('motivo');
+        $cancelar=contrato::findOrFail($contrato->idcontrato);
+        $cancelar->fechacancelacion=date('Y-m-d', strtotime('now'));
+        $cancelar->motivocancelacion=$motivo;
+        $cancelar->update();
+        return redirect('/');
     }
 
     public function redireccionarenovacion($idproductor,$idproveedor){
         $data=DB::table('productor')->where('idproductor','=',$idproductor)->first();
         $data2=DB::table('proveedor')->where('idproveedor','=',$idproveedor)->first();
-        $data3=Db::table('metodo_envio')->join('pais','metodo_envio.fkpais','=','pais.idpais')->where('fk_proveedor', '=', $idproveedor)->paginate();
-        $data4=Db::table('metodo_pago')->where('fk_proveedor','=',$idproveedor)->paginate();
-        $data5=Db::table('materiapriesencia')->where('fk_proveedor','=',$idproveedor)->paginate();
-        $data6=Db::table('otroingrediente')->where('fk_proveedor','=',$idproveedor)->paginate();
-        $data7=DB::table('pais')->where('idpais','=',$data2->fkpais)->first();
-        return view('renovar2',["productor"=>$data,"proveedor"=>$data2,"metodo_envio"=>$data3,"metodo_pago"=>$data4, "producto1"=>$data5, "producto2"=>$data6, "ubicacion"=> $data7]);
+        $data3=Db::table('pedido')->where('fk_idprov', '=', $idproveedor)->where('fk_idprod', '=', $idproductor)->paginate();
+        $data4=Db::table('pedido')->where('fk_idprov', '=', $idproveedor)->where('fk_idprod', '=', $idproductor)->where('status', '=', "a")->paginate();
+        return view('renovar2',["productor"=>$data,"proveedor"=>$data2,"pedidos"=>$data3,"pedidoa"=>$data4]);
+
+    }
+
+    public function redireccionarenovacion2($idproductor,$idproveedor,$cont1,$cont2){
+        $data=DB::table('productor')->where('idproductor','=',$idproductor)->first();
+        $data2=DB::table('proveedor')->where('idproveedor','=',$idproveedor)->first();
+        $data3=Db::table('pedido')->where('fk_idprov', '=', $idproveedor)->where('fk_idprod', '=', $idproductor)->paginate();
+        $data4=Db::table('pedido')->where('fk_idprov', '=', $idproveedor)->where('fk_idprod', '=', $idproductor)->where('status', '=', "a")->paginate();
+        $calc=($cont2*100)/$cont1;
+        $int_cast = (int)$calc;
+        $data5=$int_cast;
+        $data6=DB::table('escala')->where('fk_productor','=',$idproductor)->first();
+
+        return view('renovar3',["productor"=>$data,"proveedor"=>$data2,"pedidos"=>$data3,"pedidoa"=>$data4,"obtenido"=>$data5,"rango"=>$data6]);
+
+    }
+
+    public function redireccionarenovacion3($idproductor,$idproveedor){
+        $data=DB::table('productor')->where('idproductor','=',$idproductor)->first();
+        $data2=DB::table('proveedor')->where('idproveedor','=',$idproveedor)->first();
+        return view('cancelarRenovar',["productor"=>$data,"proveedor"=>$data2]);
 
     }
 

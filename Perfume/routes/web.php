@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RenovarController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -129,7 +130,11 @@ Route::post('/verificarR', 'RenovarController@store');
 
 Route::post('/guardar2/{idproductor}/{idproveedor}', 'prueba@store2');
 
+Route::post('norenovar/{idproductor}/{idproveedor}/', 'RenovarController@store3');
+
 Route::post('/guardarRenovacion/{idproductor}/{idproveedor}', 'prueba@store2');
+
+Route::post('compararCri/{idproductor}/{idproveedor}/{cont1}/{cont2}/', 'RenovarController@store2');
 
 Route::post('/guardarR', 'RecomendadorController@store');
 
@@ -148,6 +153,10 @@ Route::get('evaluacioninicial2/{idproductor}/{idproveedor}','prueba@redirecciona
 Route::get('evaluacion/{idproductor}/{idproveedor}','prueba@redireccionarevaluacion');
 
 Route::get('renovar2/{idproductor}/{idproveedor}','RenovarController@redireccionarenovacion');
+
+Route::get('renovar3/{idproductor}/{idproveedor}/{cont1}/{cont2}','RenovarController@redireccionarenovacion2');
+
+Route::get('cancelarRenovar/{idproductor}/{idproveedor}','RenovarController@redireccionarenovacion3');
 
 Route::get('evaluacion2/{idproductor}/{idproveedor}/{Ubi}/{envio}/{pago}/','prueba@redireccionarevaluacion2');
 
@@ -172,7 +181,11 @@ Route::post('crearcontrato/{idproductor}/{idproveedor}/','prueba@storeMetodos');
 
 Route::post('crearevaluacion/{idproductor}/{idproveedor}/{Ubi}/{envio}/{pago}/{total}/','prueba@storeMetodos2');
 
+Route::post('crearevaluacionR/{idproductor}/{idproveedor}/{obtenido}/{rango}/','RenovarController@store4');
+
 Route::post('cancelarcontrato/{idproductor}','cancelarContratoController@storeContrato');
+
+Route::post('cancelarcontratoR/{idproductor}/{idproveedor}/','RenovarController@storeContrato');
 
 Route::post('crearpedido/{idproductor}/{idproveedor}','pedidoController@crearpedido');
 ////////////////////////////////////////////////////////////////////////////////////////////////

@@ -197,7 +197,7 @@ class prueba extends Controller
         return redirect('/');
     }
 
-    public function storeMetodos2(Request $request,$idproductor,$idproveedor,$Ubi,$envio,$pago,$total){
+    public function storeMetodos2(Request $request,$idproductor,$idproveedor,$Ubi,$nevio,$pago,$total){
         $int_cast = (int)$total;
 
         $cp1= new criterio_peso;

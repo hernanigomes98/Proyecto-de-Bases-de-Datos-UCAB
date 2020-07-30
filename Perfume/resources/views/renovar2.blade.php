@@ -1,5 +1,11 @@
 @extends('adminlte::page')
 @section('content')
+
+@php
+$cont1 = 0;
+$cont2 = 0;
+@endphp
+
 <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
@@ -18,87 +24,85 @@
             </div>
           </div>
           <br>
-          <form action="{{url ('guardarRenovacion/'.$productor->idproductor.'/'.$proveedor->idproveedor.'')}}" method="POST">
-            @csrf
 
 
-            <h3>Ubicación del Proveedor: {{$ubicacion->nombrepais}}</h3><input type="number" id="Ubi" name="Ubi" min="0" max="100">
 
-          <h5 class="h3 mb-4 text-gray-800">Metodos de envio ofrecidos por el proveedor:</h5>
+          <h5 class="h3 mb-4 text-gray-800">Pedidos:</h5>
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" name="metodos_envio" id="metodos_envio" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Tipo de envio</th>
-                      <th>Pais</th>
+                      <th>Fecha</th>
+                      <th>Total</th>
+                      <th>Productor</th>
+                      <th>Proveedor</th>
+
 
                     </tr>
 
-                    @foreach ($metodo_envio as $d3)
+                    @foreach ($pedidos as $p)
                     <tr>
-                        @if ($d3->tipoenvio=="t")
-                            <td>Terrestre</td>
-                        @endif
-                        @if ($d3->tipoenvio=="a")
-                            <td>Aereo</td>
-                        @endif
-                        @if ($d3->tipoenvio=="m")
-                            <td>Maritimo</td>
-                        @endif
-                        <td>{{$d3->nombrepais}}</td>
-
+                        <td>{{$p->fecha}}</td>
+                        <td>{{$p->total}}</td>
+                        <td>{{$productor->nombre}}</td>
+                        <td>{{$proveedor->nombre}}</td>
 
                     </tr>
+                    @php
+                    $cont1 = $cont1+1;
+                    @endphp
                     @endforeach
 
                   </tbody>
                 </table>
-                <input type="number" id="envio" name="envio" min="0" max="100">
+                <h1>{{$cont1}}</h1>
+                @php
+                $cont3 = $cont1;
+                @endphp
               </div>
             </div>
           </div>
 
-          <h5 class="h3 mb-4 text-gray-800">Metodos de pago ofrecidos por el proveedor:</h5>
+          <h5 class="h3 mb-4 text-gray-800">Pedidos aprobados:</h5>
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" name="metodos_pago" id="metodos_pago" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Tipo de pago</th>
-                      <th>Porcentaje por cuota</th>
-                      <th>Tiempo entre cuotas</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                        <th>Productor</th>
+                        <th>Proveedor</th>
 
                     </tr>
-                    @foreach ($metodo_pago as $d4)
-                      <tr>
-                        @if ($d4->tipopago=="cr")
-                            <td>Credito</td>
-                        @endif
-                        @if ($d4->tipopago=="de")
-                            <td>Debito</td>
-                        @endif
-                        @if ($d4->tipopago=="tr")
-                            <td>Transferencia</td>
-                        @endif
-                        @if ($d4->tipopago=="ch")
-                            <td>Cheque</td>
-                        @endif
-                        <td>{{$d4->porcentajecuota}} %</td>
-                        <td>{{$d4->tiempocuota}} meses</td>
-                      </tr>
+                    @foreach ($pedidoa as $p2)
+                    <tr>
+                        <td>{{$p2->fecha}}</td>
+                        <td>{{$p2->total}}</td>
+                        <td>{{$productor->nombre}}</td>
+                        <td>{{$proveedor->nombre}}</td>
+
+                    </tr>
+                    @php
+                    $cont2 = $cont2+1;
+                    @endphp
                     @endforeach
                   </tbody>
                 </table>
-                <input type="number" id="pago" name="pago" min="0" max="100">
+                <h1>{{$cont2}}</h1>
+                @php
+                $cont4 = $cont2;
+                @endphp
               </div>
             </div>
           </div>
 
 
-
+          <form action="{{url ('compararCri/'.$productor->idproductor.'/'.$proveedor->idproveedor.'/'.$cont3.'/'.$cont4.'')}}" method="POST">
+            @csrf
 
           <button type="submit" onClick="alert('¿Desea Evaluar al Proveedor?')"> Evaluar Proveedor</button>
 
