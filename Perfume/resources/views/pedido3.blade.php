@@ -165,7 +165,7 @@
                         <td>{{$d6->nombre}}</td>
                         <td>{{$d6->descripcion}}</td>
                         <td>{{$d6->volml}}</td>
-                        <td>{{$d6->precio}} $</td>
+                        <td>{{$d6->precio}} dolares</td>
                         <td><input type="checkbox" id="otrosin" name="otrosin[]" value="{{$d6->idpresing}}"></td>
                         <td><input type="number" id="cantidadotrosing" name="cantidadotrosing[]"></td>
                       </tr>

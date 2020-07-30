@@ -111,7 +111,7 @@ class pedidoController extends Controller
         }
         if ($dataotrosing!=null){
             for ($i=0;$i<count($cantidadotrosing);$i++){
-                if($cantidadotrosing[$i]!=null || $cantidadotrosing[$i]!=1000){
+                if($cantidadotrosing[$i]!=null){
                    array_push($cantidadotros,$cantidadotrosing[$i]);
                }
            };

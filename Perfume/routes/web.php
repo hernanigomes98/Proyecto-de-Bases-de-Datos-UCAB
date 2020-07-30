@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RenovarController;
+use App\Http\Controllers\pagosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -121,8 +122,11 @@ Route::resource('pedidoController', 'pedidoController');
 
 Route::resource('confirmarpedido', 'confirmarPedidoController');
 
-/////////////////////////////////////////////////////////////////////////////////////////
+Route::resource('generarpagos','pagosController');
+
 Route::resource('RecomendadorController', 'RecomendadorController');
+
+////////////////////////////////////////////////////////////////////////////////
 
 Route::post('/guardar', 'prueba@store');
 
@@ -145,6 +149,8 @@ Route::post('/guardarproductorpedido','pedidoController@store');
 Route::post('/guardarempresaspedido/{idproductor}/','pedidoController@storeempresas');
 
 Route::post('/guardarproveedor', 'confirmarPedidoController@store');
+
+Route::post('/guardarproductorpago','pagosController@store');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -171,9 +177,12 @@ Route::get('pedido3/{idproductor}/{idproveedor}','pedidoController@redireccionar
 Route::get('confirmarpedido2/{idproveedor}', 'confirmarPedidoController@redireccionar');
 
 Route::get('confirmarpedido3/{idproveedor}', 'confirmarPedidoController@redireccionar2');
-///////////////////////////////////////////////////////////////////////////////////////////////
 
-Route::post('aprobarpedido/{idpedido}','confirmarPedidoController@confirmar');
+Route::get('generarpago2/{idproductor}', 'pagosController@redireccionar');
+///////////////////////////////////////////////////////////////////////////////////////////////
+Route::post('generarpagostodos/{idpedido}/{numpagos}/{montopagos}','confirmarPedidoController@generarpagos');
+
+Route::post('aprobarpedido/{idpedido}/{idmetpago}','confirmarPedidoController@confirmar');
 
 Route::post('rechazarpedido/{idpedido}','confirmarPedidoController@reprobar');
 
